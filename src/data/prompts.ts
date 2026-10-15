@@ -1,0 +1,80 @@
+import type { Level } from './vocabulary'
+
+export type SentencePrompt = { id: string; level: Level; topic: string; question: string }
+
+const promptGroups: Record<Level, Array<[string, string]>> = {
+  A1: [
+    ['Presentaciones', '¿Cómo te llamas y de dónde eres?'],
+    ['Rutinas', '¿Qué haces normalmente por la mañana?'],
+    ['Familia y amistades', '¿Cómo es una persona importante de tu familia?'],
+    ['Estudios y trabajo', '¿Estudias o trabajas? Describe un día normal.'],
+    ['Comida', '¿Cuál es tu comida favorita y cuándo la comes?'],
+    ['Viajes', '¿Cómo vas normalmente al trabajo o a clase?'],
+    ['Tiempo libre', '¿Qué haces los fines de semana?'],
+    ['Vivienda', '¿Cómo es la casa donde vives?'],
+    ['Lugares', '¿Qué lugares hay cerca de tu casa?'],
+    ['Compras', '¿Dónde compras la comida normalmente?'],
+    ['Clima', '¿Qué tiempo hace hoy en tu ciudad?'],
+    ['Aficiones', '¿Qué música te gusta escuchar?'],
+    ['Salud', '¿Qué haces para sentirte bien?'],
+    ['Planes', '¿Qué vas a hacer mañana?'],
+    ['Idiomas', '¿Por qué estudias español?'],
+  ],
+  A2: [
+    ['Rutinas', '¿Qué diferencias hay entre tus días laborables y tus fines de semana?'],
+    ['Familia y amistades', 'Cuenta cómo conociste a uno de tus mejores amigos.'],
+    ['Estudios y trabajo', '¿Qué parte de tu trabajo o tus estudios te gusta más?'],
+    ['Comida', 'Explica cómo se prepara un plato que conoces bien.'],
+    ['Viajes', 'Describe un viaje que recuerdes con cariño.'],
+    ['Experiencias pasadas', '¿Qué hiciste el fin de semana pasado?'],
+    ['Planes futuros', '¿Qué planes tienes para tus próximas vacaciones?'],
+    ['Lugares', 'Recomienda un lugar interesante de tu ciudad.'],
+    ['Tecnología', '¿Para qué utilizas el teléfono durante el día?'],
+    ['Celebraciones', '¿Cómo celebras una fecha especial con tu familia?'],
+    ['Aprendizaje', '¿Qué actividad nueva te gustaría aprender?'],
+    ['Compras', '¿Prefieres comprar por internet o en tiendas? ¿Por qué?'],
+    ['Naturaleza', '¿Qué actividades te gusta hacer al aire libre?'],
+    ['Salud', 'Describe algunos hábitos que consideras saludables.'],
+    ['Vivienda', '¿Cómo sería tu casa ideal?'],
+  ],
+  B1: [
+    ['Opiniones', '¿Crees que es mejor vivir en una ciudad grande o en un pueblo?'],
+    ['Trabajo y estudios', '¿Qué cualidades debería tener un buen jefe o profesor?'],
+    ['Experiencias pasadas', 'Cuenta una situación difícil que hayas logrado resolver.'],
+    ['Viajes', '¿Cómo puede cambiar a una persona vivir en otro país?'],
+    ['Medioambiente', '¿Qué medidas sencillas podemos tomar para cuidar el planeta?'],
+    ['Tecnología', '¿Cómo ha cambiado la tecnología nuestra forma de comunicarnos?'],
+    ['Comparaciones', 'Compara aprender en línea con aprender en un aula.'],
+    ['Cultura', '¿Qué tradición de tu país te gustaría compartir con otras personas?'],
+    ['Relaciones', '¿Qué ayuda a mantener una buena amistad con el paso del tiempo?'],
+    ['Planes futuros', '¿Cómo imaginas tu vida dentro de cinco años?'],
+    ['Salud', '¿Cómo se puede encontrar un buen equilibrio entre trabajo y descanso?'],
+    ['Consumo', '¿Qué ventajas y problemas tiene comprar productos de segunda mano?'],
+    ['Información', '¿Cómo decides si una noticia es fiable?'],
+    ['Comida', '¿Deberían las escuelas enseñar a cocinar? Explica tu opinión.'],
+    ['Sociedad', '¿Qué podría hacerse para mejorar la vida en tu barrio?'],
+  ],
+  B2: [
+    ['Sociedad', '¿Hasta qué punto influye el lugar donde nacemos en nuestras oportunidades?'],
+    ['Hipótesis', 'Si pudieras cambiar una norma de tu ciudad, ¿cuál sería y por qué?'],
+    ['Trabajo', '¿Debería reducirse la jornada laboral aunque cambiara el salario?'],
+    ['Educación', '¿Qué conocimientos deberían ser obligatorios en la educación del futuro?'],
+    ['Tecnología', '¿Qué límites deberían existir en el uso de la inteligencia artificial?'],
+    ['Medioambiente', '¿Quién tiene más responsabilidad ante el cambio climático: individuos, empresas o gobiernos?'],
+    ['Cultura', '¿Puede una obra traducida producir el mismo efecto que la original?'],
+    ['Opiniones', '¿Es siempre positivo tener muchas opciones para elegir?'],
+    ['Comparaciones', 'Compara el valor de la experiencia práctica con el de la formación académica.'],
+    ['Información', '¿Cómo afecta la rapidez de las noticias a la calidad del debate público?'],
+    ['Viajes', '¿Debería limitarse el turismo en los lugares que reciben demasiados visitantes?'],
+    ['Relaciones', '¿Cómo han cambiado las redes sociales nuestra idea de la amistad?'],
+    ['Hipótesis', '¿Qué consecuencias tendría una sociedad en la que nadie usara dinero en efectivo?'],
+    ['Sociedad', '¿Qué significa para ti que una ciudad sea realmente accesible?'],
+    ['Futuro', '¿Qué cambio actual crees que tendrá mayor impacto dentro de veinte años?'],
+  ],
+}
+
+export const prompts: SentencePrompt[] = Object.entries(promptGroups).flatMap(([level, items]) =>
+  items.map(([topic, question], index) => ({ id: `${level}-${index + 1}`, level: level as Level, topic, question })),
+)
+
+export const promptTopics = [...new Set(prompts.map((prompt) => prompt.topic))]

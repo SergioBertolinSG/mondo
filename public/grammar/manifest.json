@@ -1,0 +1,13 @@
+{
+  "version": "0.2.8",
+  "upstream_commit": "622328535865050c077ccb64cabb5fad77038bc4",
+  "languages": {
+    "es": {
+      "pack": {
+        "file": "packs/es.pack.gz",
+        "bytes": 3773233,
+        "sha256": "a01cb04af857160b94e5d9a23b36f5abec2e4767f161afdc70ae5b458848694e"
+      }
+    }
+  }
+}
